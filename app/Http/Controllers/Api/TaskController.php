@@ -18,9 +18,7 @@ class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
-        $this->middleware('role:Admin,Manager')->only(['index', 'show']);
-        $this->middleware('role:Admin,Manager')->only(['store', 'update', 'destroy']);
+        // Middleware is applied at the route level in routes/api.php
     }
 
     /**

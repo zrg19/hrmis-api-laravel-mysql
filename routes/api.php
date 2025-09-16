@@ -34,7 +34,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     
     Route::get('users/email/{email}', [UserController::class, 'findByEmail']);
     
-    Route::apiResource('tasks', TaskController::class);
+    Route::group(['middleware' => 'role:Admin,Manager'], function () {
+        Route::apiResource('tasks', TaskController::class);
+    });
     
     Route::apiResource('leaves', LeaveController::class);
     Route::get('leaves/user/{id}', [LeaveController::class, 'findByUserId']);
