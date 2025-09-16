@@ -11,7 +11,7 @@ class CreateLeaveRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class CreateLeaveRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'start_date' => 'required|date|after_or_equal:today',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'reason' => 'required|string|max:1000',
+            'status' => 'sometimes|in:Pending,Approved,Rejected',
+            'requested_by' => 'required|exists:users,id',
         ];
     }
 }
