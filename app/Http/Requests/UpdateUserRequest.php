@@ -11,7 +11,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,18 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = $this->route('user'); // Get the user ID from the route parameter
+        
         return [
-            //
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|unique:users,email,' . $userId,
+            'password' => 'sometimes|string|min:6',
+            'department' => 'sometimes|string|max:255',
+            'designation' => 'sometimes|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:500',
+            'role' => 'sometimes|in:Admin,Manager,Employee',
+            'is_active' => 'sometimes|boolean',
         ];
     }
 }
