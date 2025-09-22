@@ -84,6 +84,12 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         $user = User::create($request->validated());
+        
+        // Assign the role using Spatie Permission based on the role field
+        if ($user->role) {
+            $user->assignRole($user->role);
+        }
+        
         return response()->json($user, 201);
     }
 
@@ -170,7 +176,20 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        $oldRole = $user->role;
         $user->update($request->validated());
+        
+        // Handle role changes using Spatie Permission
+        if ($request->has('role') && $request->role !== $oldRole) {
+            // Remove old role and assign new role
+            if ($oldRole) {
+                $user->removeRole($oldRole);
+            }
+            if ($user->role) {
+                $user->assignRole($user->role);
+            }
+        }
+        
         return response()->json($user);
     }
 

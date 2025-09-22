@@ -121,6 +121,9 @@ class AuthController extends Controller
             'is_active' => true,
         ]);
 
+        // Assign the Employee role using Spatie Permission
+        $user->assignRole('Employee');
+
         $token = auth()->login($user);
 
         return response()->json([
