@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\LeaveController;
+use App\Http\Controllers\CustomerMeasurementController;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login']);
@@ -43,4 +44,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('leaves/user/{id}/pending', [LeaveController::class, 'findPendingLeavesByUserId']);
     Route::get('leaves/user/{id}/approved', [LeaveController::class, 'findApprovedLeavesByUserId']);
     Route::get('leaves/user/{id}/rejected', [LeaveController::class, 'findRejectedLeavesByUserId']);
+    
+    // Customer Measurements routes
+    Route::group(['middleware' => 'role:Admin,Manager'], function () {
+        Route::apiResource('customer-measurements', CustomerMeasurementController::class);
+        Route::get('customer-measurements/trashed', [CustomerMeasurementController::class, 'trashed']);
+        Route::post('customer-measurements/{id}/restore', [CustomerMeasurementController::class, 'restore']);
+        Route::delete('customer-measurements/{id}/force-delete', [CustomerMeasurementController::class, 'forceDelete']);
+    });
 });

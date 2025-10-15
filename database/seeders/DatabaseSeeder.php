@@ -34,6 +34,10 @@ class DatabaseSeeder extends Seeder
             'edit tasks',
             'delete tasks',
             'assign tasks',
+            'view customer measurements',
+            'create customer measurements',
+            'edit customer measurements',
+            'delete customer measurements',
         ];
 
         foreach ($permissions as $permission) {
@@ -51,6 +55,10 @@ class DatabaseSeeder extends Seeder
             'create tasks',
             'edit tasks',
             'assign tasks',
+            'view customer measurements',
+            'create customer measurements',
+            'edit customer measurements',
+            'delete customer measurements',
         ]);
         
         $employeeRole->givePermissionTo([

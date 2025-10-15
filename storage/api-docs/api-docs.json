@@ -1861,6 +1861,467 @@
                     }
                 ]
             }
+        },
+        "/api/customer-measurements": {
+            "get": {
+                "tags": [
+                    "Customer Measurements"
+                ],
+                "summary": "Get all customer measurements",
+                "description": "Retrieve a paginated list of all customer measurements",
+                "operationId": "920a23859285ed31c7ec38eb1422d19e",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number for pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 15
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search term for name, code, or phone",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Faizan"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CustomerMeasurement"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Customer Measurements"
+                ],
+                "summary": "Create a new customer measurement",
+                "description": "Create a new customer measurement record",
+                "operationId": "866889e32a95a3be051c1428ad0082ee",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateCustomerMeasurementRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Customer measurement created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer measurement created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/CustomerMeasurement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/customer-measurements/{id}": {
+            "get": {
+                "tags": [
+                    "Customer Measurements"
+                ],
+                "summary": "Get a specific customer measurement",
+                "description": "Retrieve a specific customer measurement by ID",
+                "operationId": "b10ecda04e93ec211c348c5a72214b4b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer measurement ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CustomerMeasurement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Customer measurement not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Customer Measurements"
+                ],
+                "summary": "Update a customer measurement",
+                "description": "Update an existing customer measurement record",
+                "operationId": "140eecf9cd59122be73a36c4e681a9ac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer measurement ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateCustomerMeasurementRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Customer measurement updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer measurement updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/CustomerMeasurement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Customer measurement not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Customer Measurements"
+                ],
+                "summary": "Delete a customer measurement",
+                "description": "Soft delete a customer measurement record",
+                "operationId": "3bc3219e56b866e739e8bf1a496b319c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer measurement ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer measurement deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer measurement deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Customer measurement not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/customer-measurements/trashed": {
+            "get": {
+                "tags": [
+                    "Customer Measurements"
+                ],
+                "summary": "Get soft deleted customer measurements",
+                "description": "Retrieve a list of soft deleted customer measurements",
+                "operationId": "2377f151994750c0ba9cb67f90400b38",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number for pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 15
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CustomerMeasurement"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "object"
+                                        },
+                                        "meta": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/customer-measurements/{id}/restore": {
+            "post": {
+                "tags": [
+                    "Customer Measurements"
+                ],
+                "summary": "Restore a soft deleted customer measurement",
+                "description": "Restore a soft deleted customer measurement",
+                "operationId": "446029f051ca3f31457ce0ba5e0450a3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer measurement ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer measurement restored successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer measurement restored successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/CustomerMeasurement"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Customer measurement not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/customer-measurements/{id}/force-delete": {
+            "delete": {
+                "tags": [
+                    "Customer Measurements"
+                ],
+                "summary": "Permanently delete a customer measurement",
+                "description": "Permanently delete a customer measurement from the database",
+                "operationId": "e3954702dbd105e8b9371af09a0baf23",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer measurement ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Customer measurement permanently deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customer measurement permanently deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Customer measurement not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -2042,6 +2503,251 @@
                 "items": {
                     "type": "string"
                 }
+            },
+            "CustomerMeasurement": {
+                "title": "Customer Measurement",
+                "description": "Customer Measurement model",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Faizan"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "1122"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "03123456789"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "123 Main Street",
+                        "nullable": true
+                    },
+                    "kameezlength": {
+                        "type": "string",
+                        "example": "42",
+                        "nullable": true
+                    },
+                    "teera": {
+                        "type": "string",
+                        "example": "24",
+                        "nullable": true
+                    },
+                    "baazo": {
+                        "type": "string",
+                        "example": "19",
+                        "nullable": true
+                    },
+                    "chest": {
+                        "type": "string",
+                        "example": "21",
+                        "nullable": true
+                    },
+                    "neck": {
+                        "type": "string",
+                        "example": "15",
+                        "nullable": true
+                    },
+                    "daman": {
+                        "type": "string",
+                        "example": "23",
+                        "nullable": true
+                    },
+                    "kera": {
+                        "type": "string",
+                        "example": "gol",
+                        "nullable": true
+                    },
+                    "shalwar": {
+                        "type": "string",
+                        "example": "42",
+                        "nullable": true
+                    },
+                    "pancha": {
+                        "type": "string",
+                        "example": "12",
+                        "nullable": true
+                    },
+                    "pocket": {
+                        "type": "string",
+                        "example": "2",
+                        "nullable": true
+                    },
+                    "note": {
+                        "type": "string",
+                        "example": "Stitching",
+                        "nullable": true
+                    },
+                    "created_by": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": true
+                    },
+                    "updated_by": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deleted_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "CreateCustomerMeasurementRequest": {
+                "title": "Create Customer Measurement Request",
+                "description": "Request body for creating a new customer measurement",
+                "required": [
+                    "name",
+                    "code",
+                    "phone"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Faizan"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "1122"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "03123456789"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "123 Main Street"
+                    },
+                    "kameezlength": {
+                        "type": "string",
+                        "example": "42"
+                    },
+                    "teera": {
+                        "type": "string",
+                        "example": "24"
+                    },
+                    "baazo": {
+                        "type": "string",
+                        "example": "19"
+                    },
+                    "chest": {
+                        "type": "string",
+                        "example": "21"
+                    },
+                    "neck": {
+                        "type": "string",
+                        "example": "15"
+                    },
+                    "daman": {
+                        "type": "string",
+                        "example": "23"
+                    },
+                    "kera": {
+                        "type": "string",
+                        "example": "gol"
+                    },
+                    "shalwar": {
+                        "type": "string",
+                        "example": "42"
+                    },
+                    "pancha": {
+                        "type": "string",
+                        "example": "12"
+                    },
+                    "pocket": {
+                        "type": "string",
+                        "example": "2"
+                    },
+                    "note": {
+                        "type": "string",
+                        "example": "Stitching"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateCustomerMeasurementRequest": {
+                "title": "Update Customer Measurement Request",
+                "description": "Request body for updating a customer measurement",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Faizan"
+                    },
+                    "code": {
+                        "type": "string",
+                        "example": "1122"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "03123456789"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "123 Main Street"
+                    },
+                    "kameezlength": {
+                        "type": "string",
+                        "example": "42"
+                    },
+                    "teera": {
+                        "type": "string",
+                        "example": "24"
+                    },
+                    "baazo": {
+                        "type": "string",
+                        "example": "19"
+                    },
+                    "chest": {
+                        "type": "string",
+                        "example": "21"
+                    },
+                    "neck": {
+                        "type": "string",
+                        "example": "15"
+                    },
+                    "daman": {
+                        "type": "string",
+                        "example": "23"
+                    },
+                    "kera": {
+                        "type": "string",
+                        "example": "gol"
+                    },
+                    "shalwar": {
+                        "type": "string",
+                        "example": "42"
+                    },
+                    "pancha": {
+                        "type": "string",
+                        "example": "12"
+                    },
+                    "pocket": {
+                        "type": "string",
+                        "example": "2"
+                    },
+                    "note": {
+                        "type": "string",
+                        "example": "Stitching"
+                    }
+                },
+                "type": "object"
             },
             "User": {
                 "title": "User",
@@ -2228,6 +2934,10 @@
         {
             "name": "Users",
             "description": "API Endpoints for user management"
+        },
+        {
+            "name": "Customer Measurements",
+            "description": "API endpoints for managing customer measurements"
         }
     ]
 }
