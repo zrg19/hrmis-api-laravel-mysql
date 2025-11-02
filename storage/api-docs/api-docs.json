@@ -15,7 +15,7 @@
     },
     "servers": [
         {
-            "url": "https://hrmis-api.devfamz.com/api",
+            "url": "https://hrmis-api.devfamz.com",
             "description": "Production Server"
         }
     ],
